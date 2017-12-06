@@ -32,4 +32,9 @@ Status travel(SLinkList &list,Status (* visit)(ElemType));
 //访问元素
 Status visitElem(ElemType e);
 
+//查找元素
 int locateElem(SLinkList &list,ElemType e);
+
+//(A-B)U(B-A)
+void different(SLinkList &listA,SLinkList &listB);
+
