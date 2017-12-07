@@ -55,6 +55,75 @@ Status GetTop(SeqStack S, SElemType &e){
 	e=*(S.top-1);
 	return OK;
 }
+
+Status StackEmpty(SeqStack S){
+	if(S.base==NULL){
+		return ERROR;
+	}
+	if(S.base==S.top){
+		return TRUE;
+	}
+	return FALSE;
+}
+
+Status checkBracket(char *ch){//遵从单一原则
+	struct SeqStack s;
+	InitStack(s);
+	int i=0;
+	while(*(ch+i)!='\0'){
+		SElemType e;
+		switch (*(ch+i)){
+		case '(':
+			printf("进栈\n");
+			Push(s,1);
+			break;
+		case '[':
+			Push(s,2);
+			break;
+		case '{':
+			Push(s,3);
+			break;
+		case ')':		
+			if(OK!=GetTop(s,e)){
+				return ERROR;
+			}
+			if(e==1){
+				Pop(s,e);
+			}else{
+				return ERROR;
+			}
+			break;
+		case ']':
+			if(OK!=GetTop(s,e)){
+				return ERROR;
+			}
+			if(e==2){
+				Pop(s,e);
+			}else{
+				return ERROR;
+			}
+			break;
+		case '}':
+			if(OK!=GetTop(s,e)){
+				return ERROR;
+			}
+			if(e==3){
+				Pop(s,e);
+			}else{
+				return ERROR;
+			}
+			break;
+		default:
+			break;
+		}
+		i++;
+	}
+
+	if (StackEmpty(s))
+		return OK;
+	else
+		return ERROR;
+}
 void main(){
 	struct SeqStack s;
 	InitStack(s);
@@ -72,4 +141,6 @@ void main(){
 	StackTraverse(s,&visit_display);
 	printf("栈顶元素：%d\n",GetTop(s,e));
 	StackTraverse(s,&visit_display);
+	char ch[8]={'[','(','[',']','[',']',')',']'};
+	printf("括号表达式校验结果：%d\n",checkBracket(ch));
 }
