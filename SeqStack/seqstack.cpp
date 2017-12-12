@@ -124,7 +124,8 @@ Status checkBracket(char *ch){//遵从单一原则
 	else
 		return ERROR;
 }
-void main(){
+
+void tryStack(){
 	struct SeqStack s;
 	InitStack(s);
 	Push(s,1);
@@ -143,4 +144,23 @@ void main(){
 	StackTraverse(s,&visit_display);
 	char ch[8]={'[','(','[',']','[',']',')',']'};
 	printf("括号表达式校验结果：%d\n",checkBracket(ch));
+}
+
+void move(char x,int n,char z){
+	printf("将编号为%d的盘子从%c移动到%c\n",n,x,z);
+}
+
+void hanoi(int n,char x,char y,char z){
+
+	if(n==1){
+		move(x,1,z);//将编号为1的盘子从x移动到z
+	}else{
+		hanoi(n-1,x,z,y);//将n-1个盘子从x移动到y,z作为辅助塔
+		move(x,n,z);
+		hanoi(n-1,y,x,z);//将n-1个盘子从y移动到z,x作为辅助塔
+	}
+
+}
+void main(){
+	hanoi(3,'x','y','z');
 }
