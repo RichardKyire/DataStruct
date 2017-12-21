@@ -148,7 +148,7 @@ void get_huffmanCode(HuffmanTree HT, HuffmanCode &HC, int n){
 				cd[len++]='1';
 				p=HT[p].rchild;
 			}
-		}else{
+		}else{//右孩子已经遍历过
 			p=HT[p].parent;
 			len--;
 		}
@@ -161,14 +161,14 @@ void main(){
 
 	HuffmanTree HT;
 	HuffmanCode HC;
-	int w[5] = {0,7,5,2,4};
-	HuffmanCoding(HT, HC, w, 4);
+	int w[9] = {0,5,29,7,8,14,23,3,11};
+	HuffmanCoding(HT, HC, w, 8);
 	int i=0;
-	for(i=1;i<=4;i++){
+	for(i=1;i<=8;i++){
 		printf("%s",HC[i]);
 	}
-	get_huffmanCode(HT,HC,4);	
-	for(i=1;i<=4;i++){
+	get_huffmanCode(HT,HC,8);	
+	for(i=1;i<=8;i++){
 		printf("%s ",HC[i]);
 	}
 
